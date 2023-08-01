@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodawanie nowego zadania</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div style="width: 100%; max-width: 1000px; margin: auto">
+<h2>Dodawanie nowego zadania</h2>
+
+<form action="/add" method="post" th:object="${taskToAdd}">
+    <input type="hidden" th:field="*{id}"/>
+<div class="mb-3">
+
+<div class="input-group" style="margin-bottom: 25px">
+    <span class="input-group-text">Podaj opis zadania</span><br>
+    <textarea class="form-control" aria-label="With textarea" th:field="*{description}"></textarea>
+</div>
+
+    <div class="input-group">
+        <label for="category" class="form-label" style="margin-right: 50px">Wybierz kategorie</label>
+        <select class="form-select" id="category" th:field="*{category}">
+            <option value=""></option>
+            <option th:value="${category}"
+                    th:each="category : ${T (pl.as.zarzadzaniezadaniami.Category).values()}"
+                    th:text="${category}">
+            </option>
+        </select><br>
+    </div><br/>
+
+    <div class="input-group">
+        <label for="status" class="form-label" style="margin-right: 50px">Wybierz status</label>
+        <select class="form-select" id="status" th:field="*{status}">
+            <option value=""></option>
+            <option th:value="${status}"
+                    th:each="status : ${T (pl.as.zarzadzaniezadaniami.Status).values()}"
+                    th:text="${status}">
+            </option>
+        </select><br>
+    </div><br/>
+
+
+<div class="mb-3">
+     <label for="deadLine" class="form-label" style="margin-right: 50px">Wybierz termin wykonania zadania</label>
+     <input type="date" class="form-control" id="deadLine" th:field="*{deadLine}"/>
+</div>
+
+<div class="col-12">
+     <button class="btn btn-primary" type="submit">Dodaj</button>
+</div><br>
+</div>
+</form>
+<a href="/">Powrot na strone glowna</a>
+</div>
+</body>
+</html>
